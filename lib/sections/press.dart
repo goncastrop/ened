@@ -1,6 +1,7 @@
 import 'package:ened/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:seo/seo.dart';
 
 class PressCard extends StatelessWidget {
   const PressCard({
@@ -27,54 +28,78 @@ class PressCard extends StatelessWidget {
             elevation: 0,
             color: Colors.white,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-            child: InkWell(
-              onTap: () {
-                launchUrl(Uri.parse(url));
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                    child: Image.asset(
-                      imagePath,
-                      height: isMobile ? 160 : 120,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsGeometry.all(isMobile ? 16.0 : 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 12),
-                        Text(
-                          title,
-                          style: TextStyle(
-                            fontSize: isMobile ? 14 : 12,
-                            fontWeight: FontWeight.bold,
-                            color: EnedColors.blue,
-                          ),
+            child: Seo.link(
+              anchor: title,
+              href: url,
+              child: InkWell(
+                onTap: () {
+                  launchUrl(Uri.parse(url));
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Seo.image(
+                      src: imagePath,
+                      alt: 'Imagen de prensa: $title',
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                        child: Image.asset(
+                          imagePath,
+                          height: isMobile ? 160 : 120,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
                         ),
-                        const SizedBox(height: 8),
-                        Text(description, style: TextStyle(color: EnedColors.blue, fontSize: isMobile ? 14 : 12)),
-                        const SizedBox(height: 16),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: isMobile ? 24 : 20,
-                    width: double.infinity,
-                    color: EnedColors.darkYellow,
-                    child: Center(
-                      child: Text(
-                        "LEER LA NOTA COMPLETA",
-                        style: TextStyle(fontSize: isMobile ? 10 : 8, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsetsGeometry.all(isMobile ? 16.0 : 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 12),
+                          Seo.text(
+                            text: title,
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                fontSize: isMobile ? 14 : 12,
+                                fontWeight: FontWeight.bold,
+                                color: EnedColors.blue,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Seo.text(
+                            text: description,
+                            child: Text(
+                              description,
+                              style: TextStyle(color: EnedColors.blue, fontSize: isMobile ? 14 : 12),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: isMobile ? 24 : 20,
+                      width: double.infinity,
+                      color: EnedColors.darkYellow,
+                      child: Center(
+                        child: Seo.text(
+                          text: "LEER LA NOTA COMPLETA",
+                          child: Text(
+                            "LEER LA NOTA COMPLETA",
+                            style: TextStyle(
+                              fontSize: isMobile ? 10 : 8,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

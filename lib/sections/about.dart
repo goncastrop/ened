@@ -2,6 +2,7 @@ import 'package:ened/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:seo/seo.dart';
 
 class AboutCard extends StatelessWidget {
   final String imagePath;
@@ -36,26 +37,41 @@ class AboutCard extends StatelessWidget {
                         ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(imagePath, width: double.infinity, height: 200, fit: BoxFit.cover),
+                            Seo.image(
+                              src: imagePath,
+                              alt: 'Imagen ilustrativa para: $title',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(imagePath, width: double.infinity, height: 200, fit: BoxFit.cover),
+                              ),
                             ),
                             const SizedBox(height: 16),
-                            Text(
-                              title.toUpperCase(),
-                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: EnedColors.blue),
+                            Seo.text(
+                              text: title.toUpperCase(),
+                              child: Text(
+                                title.toUpperCase(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                  color: EnedColors.blue,
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 8),
-                            Text(description, style: GoogleFonts.openSans()),
+                            Seo.text(text: description, child: Text(description, style: GoogleFonts.openSans())),
                           ],
                         )
                         : IntrinsicHeight(
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(imagePath, width: 100, fit: BoxFit.cover),
+                              Seo.image(
+                                src: imagePath,
+                                alt: 'Imagen ilustrativa para: $title',
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(imagePath, width: 100, fit: BoxFit.cover),
+                                ),
                               ),
                               const SizedBox(width: 24),
                               Expanded(
@@ -63,16 +79,22 @@ class AboutCard extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      title.toUpperCase(),
-                                      style: const TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w900,
-                                        color: EnedColors.blue,
+                                    Seo.text(
+                                      text: title.toUpperCase(),
+                                      child: Text(
+                                        title.toUpperCase(),
+                                        style: const TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w900,
+                                          color: EnedColors.blue,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(height: 8),
-                                    Text(description, style: GoogleFonts.openSans()),
+                                    Seo.text(
+                                      text: description,
+                                      child: Text(description, style: GoogleFonts.openSans()),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -148,17 +170,21 @@ c. Taller para responsables de cuentas de parroquias y grupos
         LayoutBuilder(
           builder: (context, constraints) {
             bool isMobile = constraints.maxWidth < 768;
-            return FilledButton(
-              key: registrationKey,
-              style: FilledButton.styleFrom(
-                backgroundColor: EnedColors.darkYellow,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48, vertical: isMobile ? 12 : 16),
-                textStyle: TextStyle(fontSize: isMobile ? 24 : 40, fontWeight: FontWeight.bold),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            return Seo.link(
+              anchor: "Inscribite aquí",
+              href: 'https://forms.gle/h5wGx9QnPT1wrRdp6',
+              child: FilledButton(
+                key: registrationKey,
+                style: FilledButton.styleFrom(
+                  backgroundColor: EnedColors.darkYellow,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48, vertical: isMobile ? 12 : 16),
+                  textStyle: TextStyle(fontSize: isMobile ? 24 : 40, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                onPressed: () => {launchUrl(Uri.parse("https://forms.gle/h5wGx9QnPT1wrRdp6"))},
+                child: Text('INSCRIBITE'),
               ),
-              onPressed: () => {launchUrl(Uri.parse("https://forms.gle/h5wGx9QnPT1wrRdp6"))},
-              child: Text('INSCRIBITE'),
             );
           },
         ),

@@ -1,5 +1,6 @@
 import 'package:ened/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:seo/seo.dart';
 
 class ResourcesSectionContent extends StatelessWidget {
   const ResourcesSectionContent({super.key});
@@ -8,7 +9,10 @@ class ResourcesSectionContent extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 60.0),
-        child: Text('Próximamente...', style: TextStyle(fontSize: 18, color: EnedColors.blue)),
+        child: Seo.text(
+          text: 'Próximamente...',
+          child: Text('Próximamente...', style: TextStyle(fontSize: 18, color: EnedColors.blue)),
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:ened/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:seo/seo.dart';
 
 class Section extends StatelessWidget {
   const Section({super.key, required this.title, this.isDark = false, required this.child});
@@ -25,12 +26,15 @@ class Section extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: isMobile ? 20 : 24,
-                        fontWeight: FontWeight.bold,
-                        color: isDark ? Colors.white : EnedColors.blue,
+                    Seo.text(
+                      text: title,
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          fontSize: isMobile ? 20 : 24,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : EnedColors.blue,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seo/seo.dart';
 
 class BannerSection extends StatelessWidget {
   const BannerSection({super.key});
@@ -18,11 +19,15 @@ class BannerSection extends StatelessWidget {
               child: Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-                child: Image.asset(
-                  'assets/banner.jpeg',
-                  height: isMobile ? null : 400,
-                  width: isMobile ? double.infinity : null,
-                  fit: isMobile ? BoxFit.cover : BoxFit.contain,
+                child: Seo.image(
+                  src: 'assets/banner.jpeg',
+                  alt: 'ENED - Encuentro Nacional de Evangelización Digital - Banner principal del evento',
+                  child: Image.asset(
+                    'assets/banner.jpeg',
+                    height: isMobile ? null : 400,
+                    width: isMobile ? double.infinity : null,
+                    fit: isMobile ? BoxFit.cover : BoxFit.contain,
+                  ),
                 ),
               ),
             ),

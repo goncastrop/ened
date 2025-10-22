@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seo/seo.dart';
 
 class ParticipantsSectionContent extends StatelessWidget {
   const ParticipantsSectionContent({super.key});
@@ -7,7 +8,10 @@ class ParticipantsSectionContent extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 60.0),
-        child: Text('Próximamente...', style: TextStyle(fontSize: 18, color: Colors.white)),
+        child: Seo.text(
+          text: 'Próximamente...',
+          child: Text('Próximamente...', style: TextStyle(fontSize: 18, color: Colors.white)),
+        ),
       ),
     );
   }
