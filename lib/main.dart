@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
     return SeoController(
       tree: WidgetTree(context: context),
       child: MaterialApp(
-        title: 'ENED - Encuentro Nacional de Evangelización Digital',
+        title: 'ENED - Encuentro nacional de evangelizadores digitales',
         theme: ThemeData(textTheme: GoogleFonts.montserratTextTheme()),
-        home: const MyHomePage(title: 'ENED - Encuentro Nacional de Evangelización Digital'),
+        home: const MyHomePage(title: 'ENED - Encuentro nacional de evangelizadores digitales'),
       ),
     );
   }
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             MetaTag(
               name: 'description',
               content:
-                  'Encuentro Nacional de Evangelización Digital - Un espacio para evangelizadores digitales, responsables de redes parroquiales y todos aquellos que quieren compartir la fe en el mundo digital. Inscripciones abiertas.',
+                  'Encuentro nacional de evangelizadores digitales - Un espacio para evangelizadores y misioneros digitales, y todos aquellos que quieren compartir la fe en el mundo digital. Inscripciones abiertas.',
             ),
             MetaTag(
               name: 'keywords',
@@ -86,26 +86,26 @@ class _MyHomePageState extends State<MyHomePage> {
             MetaTag(name: 'geo.country', content: 'Argentina'),
             MetaTag(name: 'geo.placename', content: 'Buenos Aires'),
             // Open Graph tags
-            MetaTag(name: 'og:title', content: 'ENED - Encuentro Nacional de Evangelización Digital'),
+            MetaTag(name: 'og:title', content: 'ENED - Encuentro nacional de evangelizadores digitales'),
             MetaTag(
               name: 'og:description',
               content:
-                  'Encuentro Nacional de Evangelización Digital - Un espacio para evangelizadores digitales y responsables de redes parroquiales. Inscripciones abiertas.',
+                  'Encuentro nacional de evangelizadores digitales - Un espacio para evangelizadores y misioneros digitales. Inscripciones abiertas.',
             ),
             MetaTag(name: 'og:type', content: 'website'),
-            MetaTag(name: 'og:url', content: 'https://ened.arg'),
-            MetaTag(name: 'og:image', content: 'https://ened.arg/assets/banner.jpeg'),
+            MetaTag(name: 'og:url', content: 'https://www.ened.com.ar'),
+            MetaTag(name: 'og:image', content: 'https://www.ened.com.ar/assets/assets/logo_redondo.png'),
             MetaTag(name: 'og:site_name', content: 'ENED'),
             MetaTag(name: 'og:locale', content: 'es_AR'),
             // Twitter Card tags
             MetaTag(name: 'twitter:card', content: 'summary_large_image'),
-            MetaTag(name: 'twitter:title', content: 'ENED - Encuentro Nacional de Evangelización Digital'),
+            MetaTag(name: 'twitter:title', content: 'ENED - Encuentro nacional de evangelizadores digitales'),
             MetaTag(
               name: 'twitter:description',
               content:
-                  'Encuentro Nacional de Evangelización Digital - Un espacio para evangelizadores digitales y responsables de redes parroquiales.',
+                  'Encuentro nacional de evangelizadores digitales - Un espacio para evangelizadores y misioneros digitales',
             ),
-            MetaTag(name: 'twitter:image', content: 'https://ened.arg/assets/banner.jpeg'),
+            MetaTag(name: 'twitter:image', content: 'https://www.ened.com.ar/assets/assets/logo_redondo.png'),
           ],
           child: Scaffold(
             appBar: PreferredSize(
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                             child: Seo.image(
                               src: 'assets/logo.png',
-                              alt: 'ENED - Logo del Encuentro Nacional de Evangelización Digital',
+                              alt: 'ENED - Logo del Encuentro nacional de evangelizadores digitales',
                               child: Image.asset('assets/logo.png', height: 50),
                             ),
                           ),
@@ -147,7 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         children: [
                           Seo.image(
                             src: 'assets/logo.png',
-                            alt: 'ENED - Logo del Encuentro Nacional de Evangelización Digital',
+                            alt: 'ENED - Logo del Encuentro nacional de evangelizadores digitales',
                             child: Image.asset('assets/logo.png', height: 50),
                           ),
                           const SizedBox(width: 24),
@@ -269,7 +269,7 @@ class Footer extends StatelessWidget {
                           children: [
                             Seo.image(
                               src: 'assets/logo_redondo.png',
-                              alt: 'ENED - Logo redondo del Encuentro Nacional de Evangelización Digital',
+                              alt: 'ENED - Logo redondo del Encuentro nacional de evangelizadores digitales',
                               child: Image.asset('assets/logo_redondo.png', height: 80),
                             ),
                             const SizedBox(height: 12),
@@ -287,7 +287,7 @@ class Footer extends StatelessWidget {
                           children: [
                             Seo.image(
                               src: 'assets/logo_redondo.png',
-                              alt: 'ENED - Logo redondo del Encuentro Nacional de Evangelización Digital',
+                              alt: 'ENED - Logo redondo del Encuentro nacional de evangelizadores digitales',
                               child: Image.asset('assets/logo_redondo.png', height: 80),
                             ),
                             Seo.text(
