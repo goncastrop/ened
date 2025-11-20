@@ -41,15 +41,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ScrollController _scrollController = ScrollController();
-  final List<GlobalKey> _sectionKeys = List.generate(6, (_) => GlobalKey());
-  final List<String> _sectionTitles = [
-    'Sobre el evento',
-    'Programa',
-    'Inscripción',
-    'Prensa',
-    'Recursos',
-    'Participantes',
-  ];
+  final List<GlobalKey> _sectionKeys = List.generate(5, (_) => GlobalKey());
+  final List<String> _sectionTitles = ['Sobre el evento', 'Programa', 'Prensa', 'Recursos', 'Participantes'];
   bool _isMenuOpen = false;
 
   void _scrollToSection(int index) {
@@ -191,10 +184,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: AboutSectionContent(registrationKey: _sectionKeys[2]),
                       ),
                       Section(key: _sectionKeys[1], title: "Programa", child: ProgramSectionContent()),
-                      Section(key: _sectionKeys[3], title: "Prensa", isDark: true, child: PressSectionContent()),
-                      Section(key: _sectionKeys[4], title: "Recursos", child: ResourcesSectionContent()),
+                      Section(key: _sectionKeys[2], title: "Prensa", isDark: true, child: PressSectionContent()),
+                      Section(key: _sectionKeys[3], title: "Recursos", child: ResourcesSectionContent()),
                       Section(
-                        key: _sectionKeys[5],
+                        key: _sectionKeys[4],
                         title: "Participantes",
                         isDark: true,
                         child: ParticipantsSectionContent(),

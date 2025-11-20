@@ -1,7 +1,6 @@
 import 'package:ened/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:seo/seo.dart';
 
 class AboutCard extends StatelessWidget {
@@ -167,38 +166,6 @@ c. Taller para responsables de cuentas de parroquias y grupos
           number: 4,
         ),
         const SizedBox(height: 32),
-        LayoutBuilder(
-          builder: (context, constraints) {
-            bool isMobile = constraints.maxWidth < 768;
-            return Seo.link(
-              anchor: "Inscribite aquí",
-              href: 'https://forms.gle/h5wGx9QnPT1wrRdp6',
-              child: FilledButton(
-                key: registrationKey,
-                style: FilledButton.styleFrom(
-                  backgroundColor: EnedColors.darkYellow,
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48, vertical: isMobile ? 12 : 16),
-                  textStyle: TextStyle(fontSize: isMobile ? 24 : 40, fontWeight: FontWeight.bold),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                ),
-                onPressed: () => {launchUrl(Uri.parse("https://forms.gle/h5wGx9QnPT1wrRdp6"))},
-                child: Text('INSCRIBITE'),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 24),
-        const Text(
-          '*Los costos de hospedaje y comida durante esos 3 días están parcialmente subsidiados.',
-          style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-        const Text(
-          'Más cerca de la fecha se informará cuánto deberá abonar cada uno.',
-          style: TextStyle(fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
       ],
     );
   }
