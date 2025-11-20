@@ -2,7 +2,7 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # or your default branch
+    branches: [ main ]
 
 permissions:
   contents: write
@@ -22,9 +22,28 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      # ✅ CAMBIO 1: Agregamos --pwa-strategy=none
+      # Esto evita que se genere el Service Worker que cachea todo agresivamente.
       - name: Build web (project page)
-        # If this repo is <user>.github.io (user page), replace base-href with "/"
-        run: flutter build web --release --base-href "/"
+        run: flutter build web --release --base-href "/" --pwa-strategy=none
+
+      # ✅ CAMBIO 2: Cache Busting manual
+      # Esto usa 'sed' para buscar referencias a scripts y agregarles un ?v=1234
+      # Forzando al navegador a verlos como archivos nuevos.
+      - name: Apply Cache Busting
+        run: |
+          # Entramos a la carpeta de build
+          cd build/web
+
+          # (Opcional) Borramos el service worker si se generó por error
+          rm -f flutter_service_worker.js
+
+          # Inyectamos etiquetas meta para prevenir caché en el navegador
+          sed -i 's/<head>/<head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">/g' index.html
+          
+          # Agregamos versión al archivo flutter.js o flutter_bootstrap.js
+          sed -i "s/flutter.js/flutter.js?v=${{ github.run_id }}/g" index.html
+          sed -i "s/flutter_bootstrap.js/flutter_bootstrap.js?v=${{ github.run_id }}/g" index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
