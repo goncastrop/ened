@@ -3,7 +3,6 @@ import 'package:ened/sections/about.dart';
 import 'package:ened/sections/banner.dart';
 import 'package:ened/sections/participants.dart';
 import 'package:ened/sections/press.dart';
-import 'package:ened/sections/program.dart';
 import 'package:ened/sections/resources.dart';
 import 'package:ened/sections/section.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +40,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final ScrollController _scrollController = ScrollController();
-  final List<GlobalKey> _sectionKeys = List.generate(5, (_) => GlobalKey());
-  final List<String> _sectionTitles = ['Sobre el evento', 'Programa', 'Prensa', 'Recursos', 'Participantes'];
+  final List<GlobalKey> _sectionKeys = List.generate(4, (_) => GlobalKey());
+  final List<String> _sectionTitles = ['Sobre el evento', 'Recursos', 'Prensa', 'Participantes'];
   bool _isMenuOpen = false;
 
   void _scrollToSection(int index) {
@@ -183,15 +182,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         isDark: true,
                         child: AboutSectionContent(registrationKey: _sectionKeys[2]),
                       ),
-                      Section(key: _sectionKeys[1], title: "Programa", child: ProgramSectionContent()),
+                      Section(key: _sectionKeys[1], title: "Recursos", child: ResourcesSectionContent()),
                       Section(key: _sectionKeys[2], title: "Prensa", isDark: true, child: PressSectionContent()),
-                      Section(key: _sectionKeys[3], title: "Recursos", child: ResourcesSectionContent()),
-                      Section(
-                        key: _sectionKeys[4],
-                        title: "Participantes",
-                        isDark: true,
-                        child: ParticipantsSectionContent(),
-                      ),
+                      Section(key: _sectionKeys[3], title: "Participantes", child: ParticipantsSectionContent()),
                       const Footer(),
                     ],
                   ),
