@@ -22,28 +22,49 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      # ✅ CAMBIO 1: Agregamos --pwa-strategy=none
-      # Esto evita que se genere el Service Worker que cachea todo agresivamente.
       - name: Build web (project page)
         run: flutter build web --release --base-href "/" --pwa-strategy=none
 
-      # ✅ CAMBIO 2: Cache Busting manual
-      # Esto usa 'sed' para buscar referencias a scripts y agregarles un ?v=1234
-      # Forzando al navegador a verlos como archivos nuevos.
-      - name: Apply Cache Busting
+      - name: Apply Cache Busting & Cleanup
         run: |
-          # Entramos a la carpeta de build
           cd build/web
 
-          # (Opcional) Borramos el service worker si se generó por error
+          # 1. Borramos el service worker si se generó
           rm -f flutter_service_worker.js
 
-          # Inyectamos etiquetas meta para prevenir caché en el navegador
+          # 2. Creamos un archivo JS temporal para matar el caché viejo y SW zombies
+          echo "
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then((regs) => {
+              regs.forEach((r) => {
+                console.log('SW Desregistrado:', r);
+                r.unregister();
+              });
+            });
+          }
+          if ('caches' in window) {
+            caches.keys().then((names) => {
+              names.forEach((n) => {
+                console.log('Cache borrado:', n);
+                caches.delete(n);
+              });
+            });
+          }
+          " > cache_cleaner.js
+
+          # 3. Inyectamos el script de limpieza en el index.html (antes del body)
+          # Usamos ?v=run_id para asegurar que el navegador ejecute este script nuevo
+          sed -i 's|</body>|<script src="cache_cleaner.js?v=${{ github.run_id }}"></script></body>|g' index.html
+
+          # 4. Inyectamos headers anti-caché en el head
           sed -i 's/<head>/<head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">/g' index.html
-          
-          # Agregamos versión al archivo flutter.js o flutter_bootstrap.js
+
+          # 5. Versionamos los scripts principales de Flutter
           sed -i "s/flutter.js/flutter.js?v=${{ github.run_id }}/g" index.html
           sed -i "s/flutter_bootstrap.js/flutter_bootstrap.js?v=${{ github.run_id }}/g" index.html
+          
+          # Opcional: versionar styles.css si existe
+          sed -i "s/styles.css/styles.css?v=${{ github.run_id }}/g" index.html || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
