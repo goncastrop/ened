@@ -42,6 +42,16 @@ class ResourcesSectionContent extends StatelessWidget {
             SizedBox(height: 32),
             HtmlWidget(
               '''
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OY9K_73Z4Sw?si=PI3w6FBv1cMohZ2U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>''',
+            ),
+            SizedBox(height: 32),
+            HtmlWidget(
+              '''
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZvVqmcUlZN0?si=mvOZFfZltxIZumVO&amp;start=112" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>''',
+            ),
+            SizedBox(height: 32),
+            HtmlWidget(
+              '''
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6dEkXZq1M4s?si=HLjPmsV0DSQYS-er" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>''',
             ),
             SizedBox(height: 32),
